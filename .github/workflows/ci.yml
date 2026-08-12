@@ -43,18 +43,19 @@ jobs:
           docker run -d --name od-smoke -p 8001:8001 object-detection-api:latest
           sleep 45
           curl -f http://localhost:8001/health || (docker logs od-smoke && exit 1)
-          python -c "
-import requests, io
-from PIL import Image
-img = Image.new('RGB', (100, 100), color=(73, 109, 137))
-buf = io.BytesIO()
-img.save(buf, format='JPEG')
-buf.seek(0)
-r = requests.post('http://localhost:8001/predict', files={'file': ('test.jpg', buf, 'image/jpeg')})
-print('Status:', r.status_code)
-print('Body:', r.json())
-assert r.status_code in [200, 503]
-"
+          python3 << 'PYEOF'
+          import requests
+          import io
+          from PIL import Image
+          img = Image.new('RGB', (100, 100), color=(73, 109, 137))
+          buf = io.BytesIO()
+          img.save(buf, format='JPEG')
+          buf.seek(0)
+          r = requests.post('http://localhost:8001/predict', files={'file': ('test.jpg', buf, 'image/jpeg')})
+          print('Status:', r.status_code)
+          print('Body:', r.json())
+          assert r.status_code in [200, 503]
+          PYEOF
           docker stop od-smoke
           docker rm od-smoke
       
