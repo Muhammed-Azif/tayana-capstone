@@ -40,7 +40,7 @@ jobs:
       
       - name: Container smoke test
         run: |
-          docker run -d --name od-smoke -p 8001:8001 object-detection-api:latest
+		docker run -d --name od-smoke -p 8001:8000 object-detection-api:latest
           sleep 45
           curl -f http://localhost:8001/health || (docker logs od-smoke && exit 1)
           python3 << 'PYEOF'
