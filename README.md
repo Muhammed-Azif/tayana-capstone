@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Object Detection Service - Capstone Deployment
 
 **Source Topic:** Topic 13 (Visual Defect/Object Detection Service) with Topic 7 (FastAPI) deployment pattern  
@@ -210,3 +211,6 @@ rm -f monitoring/*.html monitoring/*.png logs/*.jsonl
 - **CPU only:** This container runs inference on CPU. GPU deployment would require `nvidia-docker` and CUDA base images.
 - **No secrets:** No API keys, tokens, or credentials are required.
 - **Public data:** Uses torchvision pre-trained weights (public, legal, non-sensitive).
+=======
+# tayana-capstone
+>>>>>>> 38f84d9155cfa45d1111c03baefab71f0e0512e9
