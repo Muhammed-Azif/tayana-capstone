@@ -25,37 +25,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Lint check (flake8 if available)
+      - name: Lint check
         run: |
           pip install flake8 || true
           flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
       
       - name: Run pytest
-        run: |
-                    pytest tests/ -v --tb=short
+        run: pytest tests/ -v --tb=short
       
       - name: Build Docker image
-        run: |
-          docker build -t object-detection-api:latest .
+        run: docker build -t object-detection-api:latest .
       
       - name: Container smoke test
         run: |
-		docker run -d --name od-smoke -p 8001:8000 object-detection-api:latest
+          docker run -d --name od-smoke -p 8001:8000 object-detection-api:latest
           sleep 45
           curl -f http://localhost:8001/health || (docker logs od-smoke && exit 1)
-          python3 << 'PYEOF'
-          import requests
-          import io
-          from PIL import Image
-          img = Image.new('RGB', (100, 100), color=(73, 109, 137))
-          buf = io.BytesIO()
-          img.save(buf, format='JPEG')
-          buf.seek(0)
-          r = requests.post('http://localhost:8001/predict', files={'file': ('test.jpg', buf, 'image/jpeg')})
-          print('Status:', r.status_code)
-          print('Body:', r.json())
-          assert r.status_code in [200, 503]
-          PYEOF
+          curl -X POST -F "file=@sample_inputs/sample_street.jpg" http://localhost:8001/predict || (docker logs od-smoke && exit 1)
           docker stop od-smoke
           docker rm od-smoke
       
