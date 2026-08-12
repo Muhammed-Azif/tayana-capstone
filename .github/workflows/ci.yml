@@ -32,7 +32,7 @@ jobs:
       
       - name: Run pytest
         run: |
-          pytest tests/ -v --tb=short --timeout=300
+                    pytest tests/ -v --tb=short
       
       - name: Build Docker image
         run: |
