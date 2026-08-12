@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head><title>Object Detection Monitoring Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+.container { background: white; padding: 30px; border-radius: 8px; max-width: 1000px; margin: 0 auto; }
+h1 { color: #333; } h2 { color: #555; border-bottom: 2px solid #ddd; padding-bottom: 8px; }
+table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+th { background: #4CAF50; color: white; }
+.metric { background: #e8f5e9; padding: 15px; border-radius: 5px; margin: 10px 0; }
+.alert { background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; }
+.ok { background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 5px; }
+img { max-width: 100%; border: 1px solid #ddd; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Object Detection Monitoring Report</h1>
+<p>Generated: 2026-08-12T16:03:33.282216ZZ</p>
+
+<h2>Operational Summary</h2>
+<div class="metric">
+<strong>Total Requests:</strong> 2<br>
+<strong>Success Rate:</strong> 50.0%<br>
+<strong>Failed Requests:</strong> 1<br>
+<strong>Mean Latency:</strong> 120.35 ms<br>
+<strong>P95 Latency:</strong> 228.29 ms<br>
+<strong>Mean Detections/Image:</strong> 2.0<br>
+<strong>Mean Confidence:</strong> 0.7519
+</div>
+
+<h2>Thresholds & Alerts</h2>
+<table>
+<tr><th>Metric</th><th>Threshold</th><th>Current</th><th>Status</th></tr>
+<tr><td>Success Rate</td><td>&gt; 95%</td><td>50.0%</td><td><span class=\'alert\'>FAIL</span></td></tr>
+<tr><td>Mean Latency</td><td>&lt; 5000 ms</td><td>120.3 ms</td><td><span class=\'ok\'>PASS</span></td></tr>
+<tr><td>Failure Count</td><td>&lt; 5</td><td>1</td><td><span class=\'ok\'>PASS</span></td></tr>
+<tr><td>Mean Confidence</td><td>&gt; 0.30</td><td>0.752</td><td><span class=\'ok\'>PASS</span></td></tr>
+</table>
+
+<h2>Drift Analysis</h2>
+<div class="metric">
+<p>No reference baseline set. Run baseline traffic first.</p>
+</div>
+
+<h2>Recent Requests</h2>
+<table>
+<tr><th>Request ID</th><th>Status</th><th>Latency (ms)</th><th>Detections</th><th>Error</th></tr>
+<tr><td>2753b812</td><td>success</td><td>240.28</td><td>4</td><td>-</td></tr>
+<tr><td>a2ca5c42</td><td>failure</td><td>0.42</td><td>0</td><td>Invalid content type</td></tr>
+</table>
+
+<h2>Distribution Plots</h2>
+<img src="monitoring_plots.png" alt="Monitoring Plots">
+
+<h2>Interpretation</h2>
+<p>This report compares current traffic against a reference baseline. Significant latency increases
+or confidence drops may indicate model degradation, input distribution shift, or infrastructure issues.
+All images are processed on CPU; GPU would reduce latency significantly.</p>
+</div>
+</body>
+</html>

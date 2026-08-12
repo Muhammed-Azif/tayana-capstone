@@ -1,0 +1,34 @@
+{
+  "request_id": "f47ac10b",
+  "model_version": "fasterrcnn_resnet50_fpn_v2_torchvision_0.17",
+  "image_size": [
+    640,
+    480
+  ],
+  "detections": [
+    {
+      "class_id": 3,
+      "class_name": "car",
+      "confidence": 0.9823,
+      "bbox": [
+        298.4,
+        348.2,
+        452.1,
+        418.7
+      ]
+    },
+    {
+      "class_id": 1,
+      "class_name": "person",
+      "confidence": 0.8765,
+      "bbox": [
+        498.0,
+        298.3,
+        532.5,
+        402.1
+      ]
+    }
+  ],
+  "detection_count": 2,
+  "inference_time_ms": 2345.67
+}
